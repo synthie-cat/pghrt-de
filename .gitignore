@@ -1,0 +1,17 @@
+*.log
+*.cache
+*.aux
+*.fls
+*.fdb_latexmk
+*.out
+*.synctex
+*.synctex(busy)
+*.gz
+*.toc
+test.py
+test.html
+pghrt.pdf
+contacts.txt
+*.DS_Store
+/.venv/
+/venv/

@@ -1,0 +1,460 @@
+/* avec - computer modern */
+@font-face {
+  font-family: "crm";
+  src: url("font/crm.otf") format("opentype");
+}
+@font-face {
+  font-family: "crmb";
+  src: url("font/crmb.otf") format("opentype");
+}
+@font-face {
+  font-family: "crmi";
+  src: url("font/crmi.otf") format("opentype");
+}
+@font-face {
+  font-family: "crmbi";
+  src: url("font/crmbi.otf") format("opentype");
+}
+@font-face {
+  font-family: "macsucks";
+  src: url("font/macsucks.otf") format("opentype");
+}
+
+/*default for light*/
+:root {
+  --font-color: #000;
+  --font-bold: #000;
+  --link-color:blue;
+  --main-bg: #fff;
+  --toc-bg: #eee;
+  --toc-accent: #ddd;
+  --toc-hover: #ccc;
+  --typewriter-bg: #ddd;
+  --snackbar-bg: #333;
+  --snackbar-color: #fff;
+  --table-border-color: #000;
+  --font: "crm";
+  --font-i: "crmi";
+  --font-b: "crmb";
+  --font-bi: "crmbi";
+  --mobile-button: min(5vh, 80px);
+}
+
+[data-theme="dark"] {
+  --font-color: #eee;
+  --font-bold: #fff;
+  --link-color: #00cfff;
+  --main-bg: #121212;
+  --toc-bg: #323232;
+  --toc-accent: #242424;
+  --toc-hover: #161616;
+  --typewriter-bg: #323232;
+  --snackbar-bg: #333;
+  --snackbar-color: #fff;
+  --table-border-color: #eee;
+}
+
+/* i changed how i wanted to do this and now it's annoyingly repeititive but that's fineeee */
+/* i'm gonna be honest i don't actually LIKE web design you feel me? */
+/* no longer repetitive! */
+[data-font="sans"] {
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-i: var(--font);
+  --font-b: var(--font);
+  --font-bi: var(--font);
+}
+
+body {
+  font-family: var(--font);
+  padding: 0 0px 0 0;
+  margin: 0;
+  font-size: 17px;
+  font-variant-ligatures: none;
+  background: var(--main-bg);
+  color: var(--font-color);
+}
+
+#menu {
+  content: "\09776";
+  min-height: 5vh;
+  height: 5vh;
+  width: 5vw;
+  display: none;
+}
+
+.header {
+  display: none;
+}
+
+
+.ltx_TOC a:link,
+.ltx_TOC a:visited,
+.ltx_p a:link,
+.ltx_p a:visited,
+a.ltx_LaTeXML_logo:visited {
+  color: var(--link-color) !important;
+}
+
+.ltx_personname a:link, .ltx_personname a:visited {
+  color: fuchsia;
+}
+
+.ltx_title_abstract, .ltx_title, .ltx_font_bold {
+  font-family: var(--font-b);
+}
+
+.ltx_font_italic {
+  font-family: var(--font-i);
+}
+
+.ltx_font_bold.ltx_font_italic, .ltx_title .ltx_font_italic {
+  font-family: var(--font-bi) !important;
+}
+
+.ltx_title_subsection, .ltx_title, .ltx_font_bold {
+  font-weight: bold;
+  color: var(--font-bold);
+}
+
+.ltx_font_typewriter {
+  background-color: var(--typewriter-bg);
+}
+
+.ltx_page_main {
+  margin-left: 400px;
+  transition: margin 0.2s ease-out;
+  padding: min(1em, 1.5%) min(3em, 4.5%) min(1em, 1.5%) min(3em, 4.5%);
+  width: 50%;
+}
+
+.ltx_TOC a {
+  display: block;
+  width: 100%;
+}
+
+.ltx_TOC {
+  position: fixed;
+  overflow-y: scroll;
+  width: 400px;
+  background-color: var(--toc-bg);
+  transition: width 0.2s ease-out;
+  top: 0;
+  bottom: 0;
+  border-right: 2px solid var(--toc-accent);
+}
+
+.ltx_TOC.show {
+  width: 100vw;
+  visibility: visible;
+}
+
+.ltx_border_tt, .ltx_border_t, .ltx_border_bb {
+  border-color: var(--table-border-color);
+}
+
+.ltx_toclist {
+  padding: 0;
+}
+
+.ltx_tocentry {
+  padding-left: 20px;
+}
+
+.ltx_title_contents {
+  text-align: center;
+  font-size: 120%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.ltx_tag_section {
+  margin-right: .5em;
+}
+
+.ltx_p {
+  line-height: 1.4;
+}
+
+.ltx_tocentry_section {
+  cursor: pointer;
+}
+
+.ltx_graphics {
+  object-fit: contain;
+  height: auto !important;
+  width: 100% !important;
+  max-width: max-content;
+}
+
+.ltx_eqn_center_padleft, .ltx_eqn_center_padright {
+  min-width: 0;
+}
+
+.ltx_tocentry_subsection:hover, .ltx_ref.active:hover {
+ background-color: var(--toc-hover);
+}
+
+.ltx_tocentry_section:hover {
+  background-color: var(--toc-accent);
+}
+
+/* +/- handling */
+.ltx_tocentry.ltx_tocentry_section > .ltx_ref::after {
+  content: "\2795"; /* Unicode escape sequence for the plus sign (+) emoji */
+  font-size: 16px;
+  color: white;
+  float: right;
+  margin-right: 5px;
+  position: relative;
+  font-family: serif;
+}
+
+.ltx_tocentry.ltx_tocentry_section > .ltx_ref.active::after {
+  content: "\2796"; /* Unicode escape sequence for the minus sign (-) emoji */
+  position: relative;
+  font-family: serif;
+}
+
+/*side bar*/
+ol[class="ltx_toclist ltx_toclist_section"] {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  width: 97%;
+}
+
+:target::before {
+  display: block;
+  content: "";
+  margin-top: -2vh;
+  height: 2vh;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.chain {
+  text-decoration: none;
+  font-size: 80%;
+}
+
+/* removing +/- from any without subs*/
+.del::after {
+  content: "" !important;
+}
+
+/* return to ref button ⮌ */
+#return.show::after {
+  content: "⮌";
+  display: block;
+}
+
+/* return to ref button ⮌ */
+#return::after {
+  content: "🡱";
+  display: block;
+  top: 40px;
+  position: relative;
+}
+
+#return {
+  position: fixed;
+  bottom: 5vh;
+  left: calc(55% + 400px);
+  width: 80px;
+  height: 80px;
+  font-size: 60px;
+  color: var(--font-bold);
+  line-height: 0;
+  padding: 0;
+  border-radius: 0;
+  border: 2px solid var(--toc-accent);
+  background: var(--toc-bg);
+  cursor: pointer;
+  text-align: center;
+  font-family: "macsucks";
+}
+
+/* i'm just copying this shit from w3schools ngl */
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: var(--snackbar-bg);
+  color: var(--snackbar-color);
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+
+/* styling the toggle buttons, which yes i know this is cursed */
+.togglebuttons > button {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  font-size: 80px;
+  color: var(--font-bold);
+  line-height: 0;
+  padding-bottom: 9px;
+  border-radius: 0;
+  border: 2px solid var(--toc-accent);
+  background: var(--toc-bg);
+  cursor: pointer;
+}
+
+
+.togglebuttons > button:hover, #return:hover {
+  background: var(--toc-hover);
+}
+
+
+/*
+BELIEVE ME, i know this is cursed.
+YOU try having a generated html output that you're
+adding amendments to with sloppy code injection!
+AND also clearly defined content layout requirements
+based on the project requirements.
+i don't need to over engineer this, okay!?
+*/
+#font-toggle {
+  top: 80px;
+  border-top: 0;
+  font-size: 55px;
+  padding: 0 6px 1px 4px;
+  font-family: "crm";
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0; opacity: 0;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #menu {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: var(--toc-bg);
+    color: var(--font);
+    border-bottom: 2px solid var(--toc-hover);
+  }
+  .header {
+    display: block;
+    position: sticky;
+    width: 100%;
+    top: 0;
+    padding: 0;
+  }
+  .ltx_TOC {
+    width: 0;
+    visibility: hidden;
+    top: 5vh;
+    border-right: none;
+  }
+  .ltx_page_main {
+    margin: auto;
+    width: 90% !important;
+  }
+  .ltx_eqn_table {
+    width: 90% !important;
+  }
+  .ltx_tocentry.ltx_tocentry_section > .ltx_ref::after {
+    margin-right: 20px;
+  }
+  .togglebuttons > button {
+    height: var(--mobile-button);
+    width: var(--mobile-button);
+    font-size: 30px;
+    border-right: none;
+    min-width: 45px;
+  }
+  #theme-toggle {
+    top: 5vh;
+    border-top: none;
+  }
+  #font-toggle {
+    top: calc(2 * var(--mobile-button));
+  }
+  :target::before {
+    margin-top: -5vh;
+    height: 5vh;
+  }
+  #return {
+    left: calc(95% - 50px) !important;
+    height: 50px;
+    width: 50px;
+    font-size: 40px;
+  }
+  #return::after {
+    top: 23px;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .ltx_eqn_table {
+    font-size: 15px;
+  }
+}
+
+/* hack for the return button to not cut off the screen until mobile crossover */
+@media screen and (max-width: 1200px) {
+  #return {
+    left: calc(55% + 350px);
+  }
+}

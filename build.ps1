@@ -1,0 +1,1 @@
+latexmlc --destination=export/index.html '.\pghrt - DE'; python soup.py
