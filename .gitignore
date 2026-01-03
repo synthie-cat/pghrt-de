@@ -10,7 +10,7 @@
 *.toc
 test.py
 test.html
-pghrt - DE.pdf
+*.pdf
 contacts.txt
 *.DS_Store
 /.venv/
